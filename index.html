@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warrior Token</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        img { max-width: 200px; height: auto; display: block; margin-bottom: 20px;}
+    </style>
+</head>
+<body>
+    <h1>Warrior Token</h1>
+    <img id="token-image" src="" alt="Token Image">
+    <p><strong>Name:</strong> <span id="token-name"></span></p>
+    <p><strong>Symbol:</strong> <span id="token-symbol"></span></p>
+     <p><strong>Issuer:</strong> <span id="token-issuer"></span></p>
+    <p><strong>Description:</strong> <span id="token-description"></span></p>
+    <script>
+        const metadataUrl = 'https://tonkton.github.io/warrior-token-metadata/token_metadata.json'; // Replace with your JSON URL
+
+        async function fetchTokenData() {
+           try {
+              const response = await fetch(metadataUrl);
+              const data = await response.json();
+              console.log(data);
+              document.getElementById('token-name').textContent = data.name;
+              document.getElementById('token-symbol').textContent = data.symbol;
+              document.getElementById('token-image').src = data.image;
+               document.getElementById('token-issuer').textContent = data.issuer;
+               document.getElementById('token-description').textContent = data.description;
+
+           } catch (error) {
+                console.error('Error fetching token data:', error);
+            }
+
+        }
+
+        fetchTokenData();
+    </script>
+</body>
+</html>
